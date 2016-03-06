@@ -1,11 +1,12 @@
-clear
-clc
 clf
+clc
+clear
 
 M = [0 1; ... 
      0 1];
 
-[X, T] = get_sets(0.2, 100);
+[X, T] = get_sets(0.5, 100);
+[set_0, set_1] = expected(-0.5, 1.5, 0, 1, 20);
 
 net = newp(M, 1);
 IW = net.IW{1,1}
@@ -29,5 +30,10 @@ for x = x_range
     y_values = [y_values (-IW(1) * x -bias)/IW(2)];
 end
 
+% Plotting
+hold on
 plot(x_range, y_values);
+scatter(set_0(1,:), set_0(2,:), 10, 'r', 'filled');
+scatter(set_1(1,:), set_1(2,:), 10, 'g', 'filled');
 axis([-0.5 1.5 0 1])
+hold off
